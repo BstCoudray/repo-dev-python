@@ -4,10 +4,10 @@ node {
         checkout scm
      }
      stage('Build image'){
-        app = docker.build("dev-python/apache")
+        app = docker.build("devpython/httpd")
      }
      stage ('Test'){
-        withDockerContainer("dev-python/apache"){ 
+        withDockerContainer("devpython/httpd"){ 
             sh "echo 'bonjour ici python'" 
             }
             }
