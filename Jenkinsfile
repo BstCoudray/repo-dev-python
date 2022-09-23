@@ -1,11 +1,14 @@
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                //git url: 'https://github.com/bstcoudray/repo-dev-python', branch: 'main'
-                checkout scm
+node {
+    def app
+     stage('Clone-checkout'){
+        checkout scm
+     }
+     stage('Build image'){
+        app = docker.build("dev-python/apache")
+     }
+     stage ('Test'){
+        withDockerContainer("dev-python/apache"){ 
+            sh "echo 'bonjour ici python'" 
             }
-        }
-    }
+            }
 }
